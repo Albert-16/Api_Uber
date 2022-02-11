@@ -1,0 +1,36 @@
+{
+  "name": "api_uber",
+  "version": "1.0.0",
+  "description": "Trabajo grupal realizado para el segundo parcial en clase de programación móvil",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Albert-16/Api_Uber.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Albert-16/Api_Uber/issues"
+  },
+  "homepage": "https://github.com/Albert-16/Api_Uber#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^15.0.0",
+    "express-handlebars": "^6.0.2",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.2",
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "sequelize": "^6.13.0"
+  }
+}
