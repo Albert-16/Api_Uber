@@ -55,6 +55,5 @@ const Vehiculos = db.define(
         //campos que se crean automaticos para registrar hora y fecha los desactivamos.
         timestamps: false,
     },
-   
 );
 module.exports = Vehiculos;
