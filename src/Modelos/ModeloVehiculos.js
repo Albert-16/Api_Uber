@@ -7,7 +7,7 @@ const Vehiculos = db.define(
     "vehiculos",
     {
         //Declaramos la informacion de cada atributo de la tabla
-            id:{
+            id_Vehiculo:{
                 type: sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
