@@ -12,6 +12,20 @@ Descargar la Rama de Master y entrar a la terminar en la ruta de la carpeta del 
 Tener el Gestor de Base de Datos Mysql 
 Restaurar la base de datos que se encuentra en la carpeta Base de Datos/ModelUber.mwb
 
+luego tenemos que copiar el archivo configuracion.env y cambiar su nombre a .env 
+luego configuramos las variables siguientes:
+* BD = //Nombre de la Base de Datos
+* USER = //Usuario del servidor
+* PASS = //contraseña del servidor
+* HOST = //Dirección del servidor o localhost 
+* PORT_MYSQL = //Puerto que utiliza mysql server
+* PORT = //Puerto que va utilizar la api
+* correo_app = //Correo de la app para recuperar contraseñas
+* correo_servicio = smtp.gmail.com
+* correo_port = 465
+* correo_contrasenia = //Contraseña del correo electronico
+
+
 Luego de restaurar la base de datos en su servidor ejecutar el siguiente comando
 * npm run dev
 
@@ -22,6 +36,7 @@ Luego de restaurar la base de datos en su servidor ejecutar el siguiente comando
 
 * [Node Js](https://nodejs.org/es/) 
 * [MYSQL Server](https://www.mysql.com/) - Gestor de Base de Datos
+* [NPM](https://www.npmjs.com/)
 
 
 ## Versionado 📌
