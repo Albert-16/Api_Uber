@@ -1,0 +1,46 @@
+
+
+
+### Listar Datos 
+GET http://localhost:4005/uber/user/listaUsuarios 
+
+
+### Guardar Datos
+POST http://localhost:4005/uber/user/guardarUsuarios 
+
+Content-Type: application/json
+{
+    "dni": "0703200003793",
+    "nombre": "Luis",
+    "apellido": "Castellanos",
+    "telefono": "96362917",
+    "correo": "lf016158@gmail.com",
+    "nombre_Usuario": "Lflores",
+    "contrasenia": "luis1234",
+    "tipo_Usuario":"CL",
+    "estado":"AC"
+}
+
+### Editar Datos
+
+
+PUT http://localhost:4005/uber/user/editarUsuarios?id=1 
+
+Content-Type: application/json
+{
+    "dni": "0703200003793",
+    "nombre": "Luis Adolfo",
+    "apellido": "Flores Castellanos",
+    "telefono": "96362917",
+    "correo": "lf016158@gmail.com",
+    "nombre_Usuario": "Lflores",
+    "contrasenia": "luis1234",
+    "tipo_Usuario":"CL",
+    "estado":"AC"
+}
+
+
+
+
+
+
