@@ -17,6 +17,10 @@ const Viajes=db.define(
             type:sequelize.STRING(100),
             allowNull:false,
         },
+        longitud_Final:{
+            type:sequelize.STRING(100),
+            allowNull:false,
+        },
         latitud_Final:{
             type:sequelize.STRING(100),
             allowNull:false,
