@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const msj = require("../Componentes/mensaje");
 const controladorUsuario = require('../Controladores/ControladorUsuarios');
+const controladorSesiones = require('../Controladores/controladorSesiones');
 const {body ,query } = require('express-validator');
 
 
@@ -26,7 +27,7 @@ router.get("/", (req, res) => {
 });
 
 
-router.get('/listaUsuarios',controladorUsuario.ListarUsuarios);
+router.get('/listaUsuarios',controladorSesiones.validarAutenticado,controladorUsuario.ListarUsuarios);
 router.post('/guardarUsuarios',
 body('dni').isLength({max:13,min:13}).withMessage("El número de identidad no es valido ,solo se permiten 13 caracteres."),
 body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe contener al menos 2 caracteres..."),
@@ -47,5 +48,8 @@ controladorUsuario.EditarUsuario);
 
 
 router.put('/eliminarUsuarios',controladorUsuario.EliminarUsuario);
+
+router.post('/login',controladorSesiones.IncioSesion);
+router.get('/error',controladorSesiones.ValidarToken);
 
 module.exports = router;
