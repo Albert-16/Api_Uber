@@ -6,15 +6,19 @@ const { validationResult } = require("express-validator");
 const moment = require("moment");
 const passport = require("../configuracion/passport");
 const { Op } = require("sequelize");
+const servicioCorreo = require("../Configuracion/servicioCorreo");
 
 exports.validarAutenticado = passport.validarAutenticado;
 
 
+exports.GenerarPin = function aleatorio(minimo,maximo){
+    return Math.round(Math.random() * (maximo - minimo) + minimo);
+}
 
-/*
 exports.RecuperarCorreo = async (req, res) => {
     const { correo } = req.body;
-    const pin = "0703";
+    const pin = this.GenerarPin(1,9999);
+    
     const BuscarCorreo = await modeloUsuario.findOne({
         where: {
             correo: correo,
@@ -22,17 +26,18 @@ exports.RecuperarCorreo = async (req, res) => {
     });
 
     if (!BuscarCorreo) {
-        msj("No se encontró el correo electrónico", 200, [], res);
+        msj("Correo no Existente","No se encontró el correo electrónico", 200, [], res);
     } else {
         const data = {
+            nombre: BuscarCorreo.nombre + " " + BuscarCorreo.apellido,
             correo: BuscarCorreo.correo,
+            telefono: BuscarCorreo.telefono,
             pin: pin,
         };
-        EnviarCorreo.recuperarContrasena(data);
-        msj("Correo Enviado", 200, [], res);
+        servicioCorreo.sendEmail(req,res,data);
     }
 };
-*/
+
 
 exports.IncioSesion = async (req, res, next) => {
     const validacion = validationResult(req);
@@ -63,7 +68,7 @@ exports.IncioSesion = async (req, res, next) => {
                     Apellido: BuscarUsuario.apellido,
                     "Correo Electrónico": BuscarUsuario.correo,
                 };
-                const token = passport.getToken({ id: BuscarUsuario.id });
+                const token = passport.getToken({ id: BuscarUsuario.id_Usuarios });
                 const data = {
                     token: token,
                     Usuario: DatosUsuario,

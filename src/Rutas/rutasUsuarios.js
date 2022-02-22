@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 
 
 router.get('/listaUsuarios',controladorSesiones.validarAutenticado,controladorUsuario.ListarUsuarios);
-router.post('/guardarUsuarios',
+router.post('/guardarUsuarios',controladorSesiones.validarAutenticado,
 body('dni').isLength({max:13,min:13}).withMessage("El número de identidad no es valido ,solo se permiten 13 caracteres."),
 body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe contener al menos 2 caracteres..."),
 body('apellido').isLength({min:2}).withMessage("El apellido no es valido,debe contener al menos 2 caracteres..."),
@@ -37,7 +37,7 @@ body('correo').isEmail().withMessage("Ingrese un Correo Electrónico Valido...")
 body('contrasenia').isLength({min:8}).withMessage("La Contraseña debe contener al menos 8 caracteres..."),
 controladorUsuario.GuardarUsuarios);
 
-router.put('/editarUsuarios',
+router.put('/editarUsuarios',controladorSesiones.validarAutenticado,
 body('dni').isLength({max:13,min:13}).withMessage("El número de identidad no es valido ,solo se permiten 13 caracteres."),
 body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe contener al menos 2 caracteres..."),
 body('apellido').isLength({min:2}).withMessage("El apellido no es valido,debe contener al menos 2 caracteres..."),
@@ -47,9 +47,10 @@ body('contrasenia').isLength({min:8}).withMessage("La Contraseña debe contener 
 controladorUsuario.EditarUsuario);
 
 
-router.put('/eliminarUsuarios',controladorUsuario.EliminarUsuario);
+router.put('/eliminarUsuarios',controladorSesiones.validarAutenticado,controladorUsuario.EliminarUsuario);
 
 router.post('/login',controladorSesiones.IncioSesion);
 router.get('/error',controladorSesiones.ValidarToken);
+router.post('/recuperarContrasenia',controladorSesiones.RecuperarCorreo);
 
 module.exports = router;
