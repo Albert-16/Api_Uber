@@ -51,6 +51,11 @@ router.put('/eliminarUsuarios',controladorSesiones.validarAutenticado,controlado
 
 router.post('/login',controladorSesiones.IncioSesion);
 router.get('/error',controladorSesiones.ValidarToken);
-router.post('/recuperarContrasenia',controladorSesiones.RecuperarCorreo);
+router.post('/recuperarContrasenia',
+controladorSesiones.RecuperarCorreo);
+router.post('/restablecerContrasenia',
+body('contrasenia').isLength({min:8}).withMessage("La Contraseña debe contener al menos 8 caracteres..."),
+body('pin').isInt().withMessage("Ingrese un pin valido..."),
+controladorSesiones.RestablecerContraseña);
 
 module.exports = router;

@@ -24,43 +24,47 @@ const Usuarios = db.define(
       allowNull: false,
     },
     apellido: {
-        type: sequelize.STRING(45),
-        allowNull: false,
-      },
-      telefono: {
-        type: sequelize.STRING(20),
-        allowNull: false,
-      },
+      type: sequelize.STRING(45),
+      allowNull: false,
+    },
+    telefono: {
+      type: sequelize.STRING(20),
+      allowNull: false,
+    },
     correo: {
       type: sequelize.STRING(75),
       allowNull: false,
     },
     nombre_Usuario: {
-        type: sequelize.STRING(50),
-        allowNull: false,
-      },
+      type: sequelize.STRING(50),
+      allowNull: false,
+    },
     contrasenia: {
       type: sequelize.STRING(250),
       allowNull: false,
     },
     tipo_Usuario: {
-        type: sequelize.ENUM("CL", "CO"),
-        allowNull: false,
-        defaultValue: "CL",
-      },
+      type: sequelize.ENUM("CL", "CO"),
+      allowNull: false,
+      defaultValue: "CL",
+    },
     estado: {
       type: sequelize.ENUM("AC", "IN"),
       allowNull: false,
       defaultValue: "AC",
+    },
+    pin: {
+      type: sequelize.STRING(4),
+      allowNull: true
     },
     fecha_Registro: {
       type: sequelize.DATE,
       allowNull: true
     },
     fecha_Actualizacion: {
-        type: sequelize.DATE,
-        allowNull: true
-      }
+      type: sequelize.DATE,
+      allowNull: true
+    }
   },
   {
     tableName: "usuarios",
