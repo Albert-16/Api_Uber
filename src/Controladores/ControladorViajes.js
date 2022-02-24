@@ -20,29 +20,29 @@ exports.listar = async (req, res)=>{
 
  // G U A R D A R -- V I A J E S
 exports.guardar = async (req, res)=>{ 
-   
     console.log(req.body);
-    const { latitud_Inicial, longitud_Inicial, longitud_Final, latitud_Final, fecha_Inicial, fecha_Final,  fecha, direccion_Inicial, direccion_Final, total} = req.body; 
-    if(!latitud_Inicial || !longitud_Inicial || !longitud_Final || !latitud_Final || !fecha_Inicial || !fecha_Final || !fecha 
-        || !direccion_Inicial || !direccion_Final || !total){
+    const { id_Vehiculo,id_Pasajeror,latitud_Inicial, longitud_Inicial, longitud_Final, latitud_Final, fecha_Inicial, fecha_Final, direccion_Inicial, direccion_Final,id_Tipo_Pago, total} = req.body; 
+    if( !id_Vehiculo || !id_Pasajeror || !latitud_Inicial || !longitud_Inicial || !longitud_Final || !latitud_Final || !fecha_Inicial || !fecha_Final
+        || !direccion_Inicial || !direccion_Final || !id_Tipo_Pago || !total){
         msj("Advertencia","Debe llenar los campos que son obligatorios", 200, [], res);
     }
     else{
         await ModeloViaje.create({
+            id_Vehiculo:id_Vehiculo,
+            id_Pasajeror: id_Pasajeror,
             latitud_Inicial: latitud_Inicial,
             longitud_Inicial: longitud_Inicial,
             longitud_Final: longitud_Final,
             latitud_Final: latitud_Final,
             fecha_Inicial: fecha_Inicial,
             fecha_Final: fecha_Final,
-            fecha: fecha,
             direccion_Inicial: direccion_Inicial,
             direccion_Final: direccion_Final,
+            id_Tipo_Pago: id_Tipo_Pago,
             total: total
         })
         .then((data)=>{ 
-            console.log(data);
-            msj("Éxito", "El registro se almacenó correctamente.", 200, [], res);
+           msj("Éxito", "El registro se almacenó correctamente.", 200, data, res);
         })
         .catch((error)=>{
             console.log(error);

@@ -9,6 +9,14 @@ const Viajes=db.define(
             autoIncrement:true,
             allowNull:false,
         },
+        id_Vehiculo:{
+            type:sequelize.INTEGER,
+            allowNull:false,
+        },
+        id_Pasajeror:{
+           type:sequelize.INTEGER,
+           allowNull:false,          
+        },
         latitud_Inicial:{
             type:sequelize.STRING(100),
             allowNull:false,
@@ -45,6 +53,10 @@ const Viajes=db.define(
             type:sequelize.STRING(250),
             allowNull:false,
         },
+        id_Tipo_Pago:{
+            type:sequelize.INTEGER,
+            allowNull:false,
+        },
         total:{
             type:sequelize.DECIMAL(10,2),
             allowNull:false,
@@ -61,3 +73,4 @@ const Viajes=db.define(
     },
 );
 module.exports=Viajes;//Exportamos este modelo
+

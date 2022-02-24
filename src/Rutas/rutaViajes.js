@@ -10,7 +10,6 @@ router.post('/guardar', body('id_Viaje').isInt().withMessage('Debe enviar el ID 
     body('longitud_Final').isString(100).withMessage('Es necesario ingresar una longitud final'),
     body('fecha_Inicial').isDate().withMessage('Es necesario ingresar una fecha incial'),
     body('fecha_Final').isDate().withMessage('Es necesario ingresar una fecha final'),
-    body('fecha').isDate().withMessage('Es necesario ingresar una fecha'),
     body('direccion_Inicial').isString(200).withMessage('Es necesario ingresar una dirección inicial'),
     body('direccion_Final').isString(200).withMessage('Es necesario ingresar una dirección final'),
     body('total').isDecimal().withMessage('Es necesario ingresar un total valido'),controladorViaje.guardar);
