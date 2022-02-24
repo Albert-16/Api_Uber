@@ -43,7 +43,7 @@ const Viajes=db.define(
         },
         fecha:{
             type:sequelize.DATE,
-            allowNull:false,
+            allowNull:true
         },
         direccion_Inicial:{
             type:sequelize.STRING(250),

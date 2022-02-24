@@ -21,7 +21,7 @@ exports.listar = async (req, res)=>{
  // G U A R D A R -- V I A J E S
 exports.guardar = async (req, res)=>{ 
     console.log(req.body);
-    const { id_Vehiculo,id_Pasajeror,latitud_Inicial, longitud_Inicial, longitud_Final, latitud_Final, fecha_Inicial, fecha_Final, direccion_Inicial, direccion_Final,id_Tipo_Pago, total} = req.body; 
+    const { id_Vehiculo,id_Pasajeror,latitud_Inicial, longitud_Inicial, longitud_Final, latitud_Final, fecha_Inicial, fecha_Final, fecha,direccion_Inicial, direccion_Final,id_Tipo_Pago, total} = req.body; 
     if( !id_Vehiculo || !id_Pasajeror || !latitud_Inicial || !longitud_Inicial || !longitud_Final || !latitud_Final || !fecha_Inicial || !fecha_Final
         || !direccion_Inicial || !direccion_Final || !id_Tipo_Pago || !total){
         msj("Advertencia","Debe llenar los campos que son obligatorios", 200, [], res);
