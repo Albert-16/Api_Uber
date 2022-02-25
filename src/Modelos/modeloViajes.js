@@ -45,12 +45,21 @@ const Viajes=db.define(
             type:sequelize.DATE,
             allowNull:true
         },
+        estado:{
+            type: sequelize.ENUM('PND','FN','CNL'),
+            allowNull: true,  
+            defaultValue: 'FN',
+        },
         direccion_Inicial:{
             type:sequelize.STRING(250),
             allowNull:false,
         },
         direccion_Final:{
             type:sequelize.STRING(250),
+            allowNull:false,
+        },
+        id_Conductor:{
+            type:sequelize.INTEGER,
             allowNull:false,
         },
         id_Tipo_Pago:{
