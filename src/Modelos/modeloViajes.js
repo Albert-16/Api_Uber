@@ -13,7 +13,7 @@ const Viajes=db.define(
             type:sequelize.INTEGER,
             allowNull:false,
         },
-        id_Pasajeror:{
+        id_Pasajero:{
            type:sequelize.INTEGER,
            allowNull:false,          
         },
@@ -48,7 +48,7 @@ const Viajes=db.define(
         estado:{
             type: sequelize.ENUM('PND','FN','CNL'),
             allowNull: true,  
-            defaultValue: 'FN',
+            defaultValue: 'PND',
         },
         direccion_Inicial:{
             type:sequelize.STRING(250),
