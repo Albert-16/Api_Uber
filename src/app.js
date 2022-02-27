@@ -14,7 +14,7 @@ app.set('json spaces', 2);
 app.use(passport.initialize());
 //Declaramos las rutas que vamos a usar
 app.use('/uber/valoracion', require('./Rutas/rutasValoraciones'));
-
+app.use('/uber/ciudades', require('./Rutas/rutasCiudades'));
 //Iniciaríamos el servidor
 app.listen(app.get('port'), () => {
   console.log('Servidor del Uber iniciado en el puerto:', app.get('port'));
