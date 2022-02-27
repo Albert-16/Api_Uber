@@ -13,8 +13,7 @@ app.use(express.json());
 app.set('json spaces', 2);
 app.use(passport.initialize());
 //Declaramos las rutas que vamos a usar
-app.use('/uber/', require('./Rutas/index'));
-
+app.use('/uber/valoracion', require('./Rutas/rutasValoraciones'));
 
 //Iniciaríamos el servidor
 app.listen(app.get('port'), () => {
