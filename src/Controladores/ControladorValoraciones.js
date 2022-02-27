@@ -1,105 +1,96 @@
 //Cargamos el modelo que creamos
 const ModeloValoracion = require('../Modelos/ModeloValoracion');
-const mensaje = ( titulo, msj, estado, data, res);
+const msj = require('../Componentes/mensaje');
 
 //Definicion de la función
+// L I S T A R -- V A L O R A C I O N E S
 exports.listar = async (req, res)=>{
     
-    // L I S T A R -- V A L O R A C I O N E S
-    const listaValoraciones = await ModeloValoracion.findAll(); // Await: es para realizar una pausa; findAll: para que busque todo los registros que hay en el modelo y que los cargue.
+    const listaValoraciones = await ModeloValoracion.findAll(); 
     
     //Validación por si los campos se encuentran vacios.
     if(listaValoraciones.length == 0) 
     {
-        msj("No existen personas en la base de datos.");
+        msj("Advertencia", "No existen valoraciones en la base de datos.", 200, [], res);
     }
-    else{ //Si lista personas tiene datos-
-        res.json(listaPersonas); 
+    else{ 
+        msj("Éxito","Lista de valoraciones",200, listaValoraciones, res); 
     }
 };
-exports.guardar = async (req, res)=>{ //Async significa que este realizará una pausa.
-    //Variable la cual contendrá la carga del modelo
-    // G U A R D A R -- P E R S O N A S
-    console.log(req.body);// El ,body es porque asi lo tengo en Postman.
-    const { nombre, apellido } = req.body; //Capturar los valores que tengo arriba.
-    if(!nombre || !apellido){
-        res.send("Debe llenar los campos que son obligatorios");
+
+// G U A R D A R -- V A L O R A C I O N E S
+exports.guardar = async (req, res)=>{ 
+    console.log(req.body);
+    const { cantidad_estrellas, id_Viaje} = req.body; 
+    if(!cantidad_estrellas || !id_Viaje){
+        msj("Advertencia", "Debe llenar los campos que son obligatorios", 200, [], res);
     }
     else{
-        await ModeloPersona.create({
-            nombre: nombre,
-            apellido: apellido,
+        await ModeloValoracion.create({
+            cantidad_estrellas: cantidad_estrellas,
+            id_Viaje: id_Viaje,
         })
-        .then((data)=>{ //Podemos capturar un dato.
-            console.log(data);
-            res.send("El registro se almacenó correctamente.");
+        .then((data)=>{ 
+            msj("Éxito", "El registro se almacenó correctamente.", 200, data, res);
         })
         .catch((error)=>{
-            console.log(error);
-            res.send("Error al momento de guardar los datos");
+            msj("Error", "Error al momento de guardar los datos",200, error, res);
         });
     }
 };
 
- // M O D I F I C A R -- P E R S O N A S
+ // M O D I F I C A R -- V A L O R A C I O N E S
 exports.modificar = async (req, res)=>{
-    const { id } = req.query;
-    const { nombre, apellido, telefono, estado, imagen } = req.body;
-    if(!id || !nombre || !apellido){
-        res.send("Envíe los datos completos");
+    const { id_Valoracion } = req.query;
+    const { cantidad_estrellas } = req.body;
+    if(!id_Valoracion || !cantidad_estrellas){
+        msj("Advertencia", "Debe enviar los datos completos", 200, [], res);
     }
     else{
-        var buscarPersona = await ModeloPersona.findOne({
+        var buscarValoracion = await ModeloValoracion.findOne({
             where: {
-                id: id
+                id_Valoracion: id_Valoracion
             }
         });
-        if(!buscarPersona){
-            res.send("El id no existe");
+        if(!buscarValoracion){
+            msj("Advertencia", "El id de la valoración no existe.", 200, [], res);
         }
         else{
-            buscarPersona.nombre = nombre;
-            buscarPersona.apellido = apellido;
-            buscarPersona.telefono = telefono;
-            buscarPersona.estado = estado;
-            buscarPersona.imagen = imagen;
-            await buscarPersona.save() // Colocar await siempre que se hacen peticiones a un servidor de la base de datos.
+            buscarValoracion.cantidad_estrellas = cantidad_estrellas;
+            await buscarValoracion.save()
             .then((data)=>{
-                console.log(data);
-                res.send("El registro ha sido actualizado");
+                msj("Éxito", "El registro ha sido actualizado", 200, data, res);
             })
             .catch((error)=>{
-                console.log(error);
-                res.send("Error al momento de modificar el registro");
+                msj("Error", "Error al momento de modificar el registro",200, error, res);
             }); 
         }
     }
 };
 
- // E L I M I N A R -- P E R S O N A S
+ // E L I M I N A R -- V A L O R A C I O N E S
 exports.eliminar = async (req, res)=>{
-    const { id } = req.query; //Siempre le enviamos el ID.
-    if( !id ){
-        res.send("Envíe los datos completos");
+    const { id_Valoracion } = req.query; //Siempre le enviamos el ID.
+    if( !id_Valoracion ){
+       msj("Advertencia", "Envíe los datos completos", 200, [], res);
     }
     else{
-        await ModeloPersona.destroy({
+        await ModeloValoracion.destroy({
             where:{
-                id: id
+                id_Valoracion: id_Valoracion
             }
         })
         .then((data)=>{
             console.log(data);
             if(data == 0){
-                res.send("El id no existe.");
+                msj("Advertencia", "El id de la valoración no existe.", 200, [], res);
             }
             else{
-                res.send("El registro ha sido eliminado con éxito.");
+                msj("Éxito", "El registro ha sido eliminado", 200, data, res);
             }
         })
         .catch((error)=>{
-            console.log(error);
-            res.send("Error al momento de eliminar el registro.");
+            msj("Error", "Error al momento de eliminar el registro",200, error, res);
         });
     }
 };
