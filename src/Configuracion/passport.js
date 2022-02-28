@@ -4,7 +4,7 @@ const estrategiaJWT = require("passport-jwt").Strategy;
 const extraerJWT = require("passport-jwt").ExtractJwt;
 const jWT = require("jsonwebtoken");
 const moment = require("moment");
-const duracion = moment.duration(500, "m").asSeconds();
+const duracion = moment.duration(60, "m").asSeconds();
 const clave = "MyClaveSegura";
 const opciones = {};
 
