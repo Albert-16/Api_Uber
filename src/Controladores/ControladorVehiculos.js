@@ -23,20 +23,21 @@ exports.GuardarVehiculos = async (req, res) => {
         res.send(validacion.array());
     }
     else {
-        const { placa, modelo, anio, color } = req.body;
+        const { placa, id_Modelo, anio, color } = req.body;
 
-        if (!placa || !modelo || !anio || !color) {
+        if (!placa || !id_Modelo || !anio || !color) {
             res.send("[Advertencia] Debe enviar los datos completos [Advertencia]");
         }
         else {
             await ModeloVehiculo.create({
-               placa, modelo, anio, color
+               placa, id_Modelo, anio, color
             })
                 .then((data) => {
                     res.send("Registro almacenado con éxito.");
                 })
                 .catch((error) => {
                     res.send("¡Error al guardar los datos!");
+                    console.log(error);
                 });
         }
     }
@@ -45,7 +46,7 @@ exports.GuardarVehiculos = async (req, res) => {
 exports.ModificarVehiculos = async (req, res) => {
     const validacion = validationResult(req);
     const { id_Vehiculo } = req.query;
-    const { placa, modelo, anio, color } = req.body;
+    const { placa, id_Modelo, anio, color } = req.body;
     if(!validacion.isEmpty)
     {
         console.log(validacion.array());
@@ -53,7 +54,7 @@ exports.ModificarVehiculos = async (req, res) => {
     }
     else{
        
-        if (!id_Vehiculo || !placa || !modelo || !anio || !color) {
+        if (!id_Vehiculo || !placa || !id_Modelo || !anio || !color) {
             res.send("[Advertencia] Debe enviar los datos completos [Advertencia]");
         }
         else{
@@ -67,7 +68,7 @@ exports.ModificarVehiculos = async (req, res) => {
             }
             else {
                 buscarVehiculo.placa =placa;
-                buscarVehiculo.modelo =modelo;
+                buscarVehiculo.id_Modelo =id_Modelo;
                 buscarVehiculo.anio =anio;
                 buscarVehiculo.color =color;
                 await buscarVehiculo.save()
@@ -96,7 +97,7 @@ exports.EliminarVehiculos = async (req, res) => {
     }
     else{
        
-        if (!id_Vehiculo || !estado) {
+        if (!id_Vehiculo) {
             console.log(id_Vehiculo);
             console.log(estado);
             res.send("[Advertencia] Debe enviar los datos completos [Advertencia]");

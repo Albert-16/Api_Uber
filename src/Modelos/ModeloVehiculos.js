@@ -12,12 +12,12 @@ const Vehiculos = db.define(
                 primaryKey: true,
                 autoIncrement: true,
                 allowNull: false,
-            },    
-            placa:{ 
-                type: sequelize.STRING(45),
-                allowNull: false,
             },
-            modelo:{
+            id_Modelo:{
+                type: sequelize.INTEGER,
+                allowNull: false,
+            },     
+            placa:{ 
                 type: sequelize.STRING(45),
                 allowNull: false,
             },
@@ -28,11 +28,6 @@ const Vehiculos = db.define(
             color:{
                 type: sequelize.STRING(45),
                 allowNull: false,
-            },
-            marca:{
-                type: sequelize.STRING(45),
-                allowNull: true,
-                defaultValue: true,
             },
             estado:{
                 type: sequelize.BOOLEAN,
