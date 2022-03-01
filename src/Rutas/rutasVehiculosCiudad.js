@@ -16,7 +16,7 @@ controladorVehiculosCiudad.GuardarRegistro);
 
 
 router.put('/modificar',
-query('id_Vehiculo').isInt().withMessage("Debe enviar un ID válido"),
+body('id_Vehiculo').isInt().withMessage("Debe enviar un ID válido"),
 body('id_Ciudad').isInt().withMessage("Debe enviar un ID válido"),controladorVehiculosCiudad.ModificarRegistro);
 
 module.exports = router;

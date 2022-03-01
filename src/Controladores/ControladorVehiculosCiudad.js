@@ -45,8 +45,7 @@ exports.GuardarRegistro = async (req, res) => {
 
 exports.ModificarRegistro = async (req, res) => {
     const validacion = validationResult(req);
-    const { id_Vehiculo } = req.query;
-    const { id_Ciudad } = req.body;
+    const { id_Vehiculo, id_Ciudad } = req.body;
     if(!validacion.isEmpty)
     {
         console.log(validacion.array());
