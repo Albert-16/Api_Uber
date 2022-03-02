@@ -17,6 +17,7 @@ app.use('/uber/', require('./Rutas/index'));
 app.use('/uber/user', require('./Rutas/rutasUsuarios'));
 app.use('/uber/vehiculosConductor', require('./Rutas/rutasVehiculoConductor'));
 
+app.use('/uber/viajes/', require('./rutas/rutaViajes'));
 
 //Iniciaríamos el servidor
 app.listen(app.get('port'), () => {
