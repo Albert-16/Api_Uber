@@ -25,6 +25,8 @@ app.use('/uber/viajes/', require('./rutas/rutaViajes'));
 app.use('/uber/marcas', require('./Rutas/RutasMarcas'));
 app.use('/uber/modelos', require('./Rutas/RutasModelos'));
 
+app.use('/uber/valoracion', require('./Rutas/rutasValoraciones'));
+app.use('/uber/ciudades', require('./Rutas/rutasCiudades'));
 //Iniciaríamos el servidor
 app.listen(app.get('port'), () => {
   console.log('Servidor del Uber iniciado en el puerto:', app.get('port'));
