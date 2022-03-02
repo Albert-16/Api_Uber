@@ -22,6 +22,8 @@ app.use('/uber/vehiculos_Ciudad', require('./Rutas/rutasVehiculosCiudad'));
 app.use('/uber/TiposDePago', require('./Rutas/rutasTiposDePagos'));
 
 app.use('/uber/viajes/', require('./rutas/rutaViajes'));
+app.use('/uber/marcas', require('./Rutas/RutasMarcas'));
+app.use('/uber/modelos', require('./Rutas/RutasModelos'));
 
 //Iniciaríamos el servidor
 app.listen(app.get('port'), () => {
