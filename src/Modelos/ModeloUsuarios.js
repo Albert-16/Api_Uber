@@ -79,6 +79,7 @@ const Usuarios = db.define(
         Usuario.contrasenia = hash;
       },
     },
+    
   }
 );
 
