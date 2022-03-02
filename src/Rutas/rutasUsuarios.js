@@ -38,6 +38,7 @@ body('contrasenia').isLength({min:8}).withMessage("La Contraseña debe contener 
 controladorUsuario.GuardarUsuarios);
 
 router.put('/editarUsuarios',controladorSesiones.validarAutenticado,
+query('id').isInt().withMessage("Debe ser un numero entero"),
 body('dni').isLength({max:13,min:13}).withMessage("El número de identidad no es valido ,solo se permiten 13 caracteres."),
 body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe contener al menos 2 caracteres..."),
 body('apellido').isLength({min:2}).withMessage("El apellido no es valido,debe contener al menos 2 caracteres..."),
@@ -47,7 +48,9 @@ body('contrasenia').isLength({min:8}).withMessage("La Contraseña debe contener 
 controladorUsuario.EditarUsuario);
 
 
-router.put('/eliminarUsuarios',controladorSesiones.validarAutenticado,controladorUsuario.EliminarUsuario);
+router.put('/eliminarUsuarios',
+query('id').isInt().withMessage("Debe ser un numero entero"),
+controladorSesiones.validarAutenticado,controladorUsuario.EliminarUsuario);
 
 router.post('/login',controladorSesiones.IncioSesion);
 router.get('/error',controladorSesiones.ValidarToken);
