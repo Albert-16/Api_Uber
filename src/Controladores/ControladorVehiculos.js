@@ -53,7 +53,6 @@ exports.ModificarVehiculos = async (req, res) => {
         res.send(validacion.array());
     }
     else{
-       
         if (!id_Vehiculo || !placa || !id_Modelo || !anio || !color) {
             res.send("[Advertencia] Debe enviar los datos completos [Advertencia]");
         }

@@ -12,13 +12,16 @@ router.get('/listar',controladorVehiculo.ListarVehiculos);
 
 router.post('/guardar' ,
 body('placa').isLength({min:7}).withMessage("La placa debe contener un mínimo de 7 caracteres"),
+body('id_Modelo').isInt().withMessage("Debe enviar un ID válido"),
 body('anio').isInt().withMessage('Debe enviar un año válido'),controladorVehiculo.GuardarVehiculos);
 
 
 router.put('/modificar',
 query('id_Vehiculo').isInt().withMessage("Debe enviar un ID válido"),
 body('placa').isLength({min:7}).withMessage("La placa debe contener un mínimo de 7 caracteres"),
-body('anio').isInt().withMessage('Debe enviar un año válido'),controladorVehiculo.ModificarVehiculos);
+body('id_Modelo').isInt().withMessage("Debe enviar un ID válido"),
+body('anio').isInt().withMessage('Debe enviar un año válido')
+,controladorVehiculo.ModificarVehiculos);
 
 
 router.put('/eliminar',

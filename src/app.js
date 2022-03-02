@@ -17,6 +17,7 @@ app.use(passport.initialize());
 app.use('/uber/', require('./Rutas/index'));
 app.use('/uber/vehiculos', require('./Rutas/rutasVehiculos'));
 app.use('/uber/vehiculos_Ciudad', require('./Rutas/rutasVehiculosCiudad'));
+app.use('/uber/TiposDePago', require('./Rutas/rutasTiposDePagos'));
 
 
 //Iniciaríamos el servidor
