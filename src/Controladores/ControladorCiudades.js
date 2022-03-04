@@ -6,7 +6,12 @@ const msj = require('../Componentes/mensaje');
 // L I S T A R -- C I U D A D E S 
 exports.listar = async (req, res) => {
     try {
-        const listaCiudades = await ModeloCiudad.findAll();
+        const listaCiudades = await ModeloCiudad.findAll({
+            attributes:[
+                ['id_Ciudad','#ID'],
+                ['descripcion_Ciudad','Ciudad']
+            ]
+        });
 
         //Validación por si los campos se encuentran vacios.
         if (listaCiudades.length == 0) {
@@ -32,15 +37,29 @@ exports.guardar = async (req, res) => {
             msj("Advertencia", "Debe llenar los campos que son obligatorios", 200, [], res);
         }
         else {
-            await ModeloCiudad.create({
-                descripcion_Ciudad: descripcion_Ciudad,
-            })
-                .then((data) => {
-                    msj("Éxito", "El registro se almacenó correctamente.", 200, data, res);
+
+            const ExistCiudad = await ModeloCiudad.findOne({ 
+                where: { 
+                    descripcion_Ciudad: descripcion_Ciudad
+                }
+            });
+
+            if(ExistCiudad) {
+                msj("Ciudad existente", "La ciudad ya se encuentra registrada.", 200, [], res);
+            }
+            else
+            {
+                await ModeloCiudad.create({
+                    descripcion_Ciudad: descripcion_Ciudad,
                 })
-                .catch((error) => {
-                    msj("Error", "Error al momento de guardar los datos", 200, error, res);
-                });
+                    .then((data) => {
+                        msj("Éxito", "El registro se almacenó correctamente.", 200, data, res);
+                    })
+                    .catch((error) => {
+                        msj("Error", "Error al momento de guardar los datos", 200, error, res);
+                    });
+    
+            }
 
         }
     }
@@ -106,7 +125,7 @@ exports.eliminar = async (req, res) => {
                         msj("Advertencia", "El id de la ciudad no existe.", 200, [], res);
                     }
                     else {
-                        msj("Éxito", "El registro ha sido eliminado", 200, data, res);
+                        msj("Éxito", "El registro ha sido eliminado", 200, [], res);
                     }
                 })
                 .catch((error) => {
