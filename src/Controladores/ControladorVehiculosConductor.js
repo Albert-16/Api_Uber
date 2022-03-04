@@ -1,6 +1,7 @@
 const modeloUsuario = require("../Modelos/ModeloUsuarios");
 const msj = require("../Componentes/mensaje");
 const modeloConductorByVehiculo = require("../Modelos/ModeloVehiculoConductor");
+const modeloVehiculo = require("../Modelos/ModeloVehiculos");
 const con = require("../Configuracion/coneccionMysql");
 const {validationResult} = require("express-validator");
 
@@ -45,10 +46,20 @@ exports.GuardarVehiculoByCondcutor = async (req, res) =>{
                     id_Usuarios: id_Conductor,tipo_Usuario:"CO"
                 }
             });
+
+            const ExistVehiculo = await modeloVehiculo.findOne({
+                where: {
+                    id_Vehiculo: id_Vehiculo,estado:0
+                }
+            });
                
             if(!ExistConductor)
             {
                 msj("Conductor no Existente","El conductor no se encuentra registrado...",200,[],res);
+            }
+            else if(!ExistVehiculo)
+            {
+                msj("Vehiculo no Existente","El vehículo no se encuentra registrado...",200,[],res);
             }
             else
             {
@@ -80,9 +91,19 @@ exports.EditarVehiculoByCondcutor = async (req, res) =>{
                 }
             });
                
+            const ExistVehiculo = await modeloVehiculo.findOne({
+                where: {
+                    id_Vehiculo: id_Vehiculo,estado:0
+                }
+            });
+            
             if(!ExistConductor)
             {
                 msj("Conductor no Existente","El conductor no se encuentra registrado...",200,[],res);
+            }
+            else if(!ExistVehiculo)
+            {
+                msj("Vehiculo no Existente","El vehículo no se encuentra registrado...",200,[],res);
             }
             else
             {
