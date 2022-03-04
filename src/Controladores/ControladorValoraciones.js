@@ -1,22 +1,29 @@
 //Cargamos el modelo que creamos
 const ModeloValoracion = require('../Modelos/ModeloValoracion');
 const msj = require('../Componentes/mensaje');
-
+const con = require('../Configuracion/coneccionMysql');
 //Definicion de la función
 // L I S T A R -- V A L O R A C I O N E S
 exports.listar = async (req, res) => {
     try {
-        const listaValoraciones = await ModeloValoracion.findAll();
-
-        //Validación por si los campos se encuentran vacios.
-        if (listaValoraciones.length == 0) {
-            msj("Advertencia", "No existen valoraciones en la base de datos.", 200, [], res);
-        }
-        else {
-            msj("Éxito", "Lista de valoraciones", 200, listaValoraciones, res);
-        }
-    }
-    catch (error) {
+        var ListaValoracion = [];
+        const query = "select * from listavaloracion;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                ListaValoracion = result;
+                const totalRegistros = result.length;
+                if (!ListaValoracion) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                    msj("Lista de Valoración", "Total de registros: " + totalRegistros, 200, ListaValoracion, res);
+                }
+            });
+        });
+    } catch (error) {
         res.status(500).json({
             error: error.toString()
         });
@@ -35,7 +42,7 @@ exports.guardar = async (req, res) => {
             if (cantidad_estrellas >= 6) {
                 msj("Advertencia", "La cantidad de estrellas no puede ser mayor a '5'.", 200, [], res)
             }
-            if (cantidad_estrellas <= 0) {
+            else if (cantidad_estrellas <= 0) {
                 msj("Advertencia", "La cantidad de estrellas no puede ser menor o igual a 0.", 200, [], res);
             } else {
                 await ModeloValoracion.create({
@@ -76,12 +83,13 @@ exports.modificar = async (req, res) => {
                 msj("Advertencia", "El id de la valoración no existe.", 200, [], res);
             }
             else {
-                if (cantidad_estrellas >= 6) {
-                    msj("Advertencia", "La cantidad de estrellas no puede ser mayor a 5.", 200, [], res);
+                if (cantidad_estrellas > 5) {
+                    msj("Advertencia", "La cantidad de estrellas no puede ser mayor a '5'.", 200, [], res)
                 }
-                if (cantidad_estrellas <= 0) {
+                else if (cantidad_estrellas < 0) {
                     msj("Advertencia", "La cantidad de estrellas no puede ser menor o igual a 0.", 200, [], res);
-                } else {
+                }
+                else {
                     buscarValoracion.cantidad_estrellas = cantidad_estrellas;
                     await buscarValoracion.save()
                         .then((data) => {
@@ -120,7 +128,7 @@ exports.eliminar = async (req, res) => {
                         msj("Advertencia", "El id de la valoración no existe.", 200, [], res);
                     }
                     else {
-                        msj("Éxito", "El registro ha sido eliminado", 200, data, res);
+                        msj("Éxito", "El registro ha sido eliminado", 200, [], res);
                     }
                 })
                 .catch((error) => {
