@@ -4,7 +4,7 @@ Este proyecto se encarga del manejo de viajes para distintas zonas de la ciudad 
 
 ## Comenzando 🚀
 
-Descargar la Rama de Master y entrar a la terminar en la ruta de la carpeta del proyecto y asegurarse de tener instalado node js y npm instalados en su ordenador, Luego ejecutar el comando npm install para actualizar los paquetes del proyecto.
+Descargar la Rama de Master y entrar a la terminal en la ruta de la carpeta del proyecto y asegurarse de tener instalado node js y npm instalados en su ordenador, Luego ejecutar el comando npm install para actualizar los paquetes del proyecto.
 
 
 ### Pre-requisitos 📋
