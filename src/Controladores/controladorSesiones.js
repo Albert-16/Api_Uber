@@ -144,7 +144,6 @@ exports.IncioSesion = async (req, res, next) => {
             }
         }
     } catch (error) {
-        console.log(error.toString());
         res.status(500).json({ error: error.toString() });
     }
 
