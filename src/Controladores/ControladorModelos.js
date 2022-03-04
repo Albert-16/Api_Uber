@@ -2,19 +2,27 @@
 const ModeloModelos = require('../modelos/ModeloModelos');
 const { validationResult } = require('express-validator');
 const msj = require("../Componentes/mensaje");
-
+const con = require('../Configuracion/coneccionMysql');
 //Definición de la función
 exports.listar = async (req, res) => {
     try {
-        // L I S T A R -- M A R C A S
-        const listaModelos = await ModeloModelos.findAll();
-        //Validación por si los campos se encuentran vacios.
-        if (listaModelos.length == 0) //Si lista marcas está vacío o nulo.
-        {
-            msj("Listar las Marcas", "No existen Marcas en la base de datos", 200, [], res);
-        } else { //Si lista marcas tiene datos.
-            msj("Éxito", "Lista de Marcas", 200, listaModelos, res);
-        }
+        var ListaModelos = [];
+        const query = "select * from listamodelos;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                ListaModelos = result;
+                const totalRegistros = result.length;
+                if (!ListaModelos) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                    msj("Lista de Modelos", "Total de registros: " + totalRegistros, 200, ListaModelos, res);
+                }
+            });
+        });
     } catch (error) {
         res.status(500).json({
             error: error.toString()
@@ -26,10 +34,9 @@ exports.guardar = async (req, res) => {
     try {
         const validacion = validationResult(req);
         if (!validacion.isEmpty()) {
-            console.log(validacion.array());
-            res.json(validacion.array());
+            msj("Datos Erroneos", "Los datos enviados no son correctos", 200, validacion.array(), res);
         } else {
-            console.log(req.body);
+         
             const {
                 descripcion_Modelo,
                 estado_Modelo,
@@ -63,27 +70,32 @@ exports.modificar = async (req, res) => {
     try {
         const validacion = validationResult(req);
         if (!validacion.isEmpty()) {
-            console.log(validacion.array());
-            res.json(validacion.array());
+            msj("Datos Erroneos", "Los datos enviados no son correctos", 200, validacion.array(), res);
         } else {
             const {
                 id_Modelo
             } = req.query;
             const {
-                estado_Modelo
+                descripcion_Modelo,
+                estado_Modelo,
+                id_Marca,
             } = req.body;
-            if (!estado_Modelo) {
+           
+            if (estado_Modelo == null) {
                 msj("Advertencia", "Debe ingresar un estado válido.", 200, [], res);
-            } else {
+            } 
+            else {
                 var buscarModelo = await ModeloModelos.findOne({
                     where: {
                         id_Modelo: id_Modelo
                     }
                 });
                 if (!buscarModelo) {
-                    msj("Advertencia", "El id de la marca no existe", 200, [], res)
+                    msj("Advertencia", "El id del modelo no existe", 200, [], res)
                 } else {
                     buscarModelo.estado_Modelo = estado_Modelo;
+                    buscarModelo.descripcion_Modelo = descripcion_Modelo;
+                    buscarModelo.id_Marca = id_Marca;
                     await buscarModelo.save()
                         .then((data) => {
                             msj("Éxito", "El registro se actualizó correctamente.", 200, data, res);
@@ -106,22 +118,21 @@ exports.eliminar = async (req, res) => {
     try {
         const validacion = validationResult(req);
         if (!validacion.isEmpty()) {
-            console.log(validacion.array());
-            res.json(validacion.array());
+            msj("Datos Erroneos", "Los datos enviados no son correctos", 200, validacion.array(), res);
         } else {
             const {
                 id_Modelo
             } = req.query; //Siempre le enviamos el ID.
             if (!id_Modelo) {
-                msj("Advertencia", "Ingrese una marca existente.", 200, [], res);
+                msj("Advertencia", "Ingrese un modelo existente.", 200, [], res);
             } else {
                 var buscarModelo = await ModeloModelos.findOne({
                     where: {
-                        id_Marca: id_Modelo
+                        id_Modelo: id_Modelo
                     }
                 });
                 if (!buscarModelo) {
-                    msj("Advertencia", "El id del viaje no existe", 200, [], res)
+                    msj("Advertencia", "El id del modelo no existe", 200, [], res)
                 } else {
                     buscarModelo.estado_Modelo = 0;
                     await buscarModelo.save()
