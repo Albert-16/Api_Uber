@@ -2,26 +2,31 @@
 const modeloUsuario = require("../Modelos/ModeloUsuarios");
 const msj = require("../Componentes/mensaje");
 const { validationResult } = require("express-validator");
-
+const con = require("../Configuracion/coneccionMysql");
 //Metodo para obtner la lista de todos los registros de la base de datos
 exports.ListarUsuarios = async (req, res) => {
     try {
-       
-        const listaUsuarios = await modeloUsuario.findAll({
-            attributes: [
-                ['dni', 'Numero de Identidad'],//['Campo de la tabla','Alias']
-                ['nombre', 'Nombre'],
-                ['apellido', 'Apellido'],
-                ['telefono', 'Teléfono'],
-                ['correo', 'Correo Electrónico'],
-                ['nombre_Usuario', 'Nombre de Usuario'],
-                ['fecha_Actualizacion', 'Ultima Modificación']
-            ]
+        var ListaUsuarios = [];
+        const query = "select * from listausuarios;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                ListaUsuarios = result;
+                const totalRegistros = result.length;
+                if (!ListaUsuarios) {
+                    msj("Lista Vaciá", "No existen Marcas en la base de datos", 200, [], res);
+                }
+                else {
+                    msj("Lista de Usuarios", "Total de registros: " + totalRegistros, 200, ListaUsuarios, res);
+                }
+            });
         });
-        const totalRegistros = listaUsuarios.length;
-        msj("Lista de Usuarios", "Total de Registros: " + totalRegistros, 200, listaUsuarios, res);
     } catch (error) {
-        res.status(500).json({ error: error.toString() });
+        res.status(500).json({
+            error: error.toString()
+        });
     }
 };
 
