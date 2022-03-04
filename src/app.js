@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const app = express();
 require('dotenv').config();
 const passport = require('passport');
-//Asignacion del puerto a utilizar
+//Asignación del puerto a utilizar
 app.set('port', process.env.PORT || 4005);
 
 app.use(morgan('dev'));
@@ -21,7 +21,7 @@ app.use('/uber/vehiculos', require('./Rutas/rutasVehiculos'));
 app.use('/uber/vehiculos_Ciudad', require('./Rutas/rutasVehiculosCiudad'));
 app.use('/uber/TiposDePago', require('./Rutas/rutasTiposDePagos'));
 
-app.use('/uber/viajes/', require('./rutas/rutaViajes'));
+app.use('/uber/viajes/', require('./Rutas/rutaViajes'));
 app.use('/uber/marcas', require('./Rutas/RutasMarcas'));
 app.use('/uber/modelos', require('./Rutas/RutasModelos'));
 
