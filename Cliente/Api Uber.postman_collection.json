@@ -1,0 +1,1159 @@
+{
+	"info": {
+		"_postman_id": "c17f9f22-4f07-4676-aaa6-40f85fe84f6d",
+		"name": "Api Uber",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ2MTkzMjQwLCJleHAiOjE2NDYxOTY4NDB9.MZYqWQHGAvVOJlRR2eOi8096RQqPwpCPwXfrBB3ze2M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/user/listaUsuarios/",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"listaUsuarios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar Usuarios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"0704200003775\",\r\n    \"nombre\": \"Oziel\",\r\n    \"apellido\": \"Gonzales\",\r\n    \"telefono\": \"96362917\",\r\n    \"correo\": \"Ogonzales@unicah.edu\",\r\n    \"nombre_Usuario\": \"Ogonzales\",\r\n    \"contrasenia\": \"Oziel1234\",\r\n    \"confirmarContrasenia\": \"Oziel1\",\r\n    \"tipo_Usuario\":\"CO\",\r\n    \"estado\":\"AC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/uber/user/guardarUsuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"guardarUsuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"LFlores\",\r\n    \"contrasenia\":\"Luisito1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/uber/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ1NTAzMjQyLCJleHAiOjE2NDU1MzMyNDJ9.9WZMcm9Q24HYNOMfhsvJ1MRtj9XXxKd7t63xuSIynF8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"0703200003793\",\r\n    \"nombre\": \"Luis Flores\",\r\n    \"apellido\": \"Castellanos\",\r\n    \"telefono\": \"96362917\",\r\n    \"correo\": \"lua_floresc@unicah.edu\",\r\n    \"nombre_Usuario\": \"LFlores\",\r\n    \"contrasenia\": \"luis1234\",\r\n    \"confirmarContrasenia\": \"luis1234\",\r\n    \"contraseniaActual\": \"luis1234\",\r\n    \"tipo_Usuario\":\"CL\",\r\n    \"estado\":\"AC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/uber/user/editarUsuarios?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"editarUsuarios"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/uber/user/eliminarUsuarios?id=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"eliminarUsuarios"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recuperar Contraseña",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\": \"lua_floresc@unicah.edu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/uber/user/recuperarContrasenia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"recuperarContrasenia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restablecer Contraseña",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pin\": \"1716\",\r\n    \"contrasenia\": \"Luisito1234\",\r\n    \"confirmarContrasenia\": \"Luisito1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4005/uber/user/restablecerContrasenia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"user",
+								"restablecerContrasenia"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VehiculosCondcutor",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ2MTYyNzAzLCJleHAiOjE2NDYxNjYzMDN9.xKu8Fdh5G7awDfNvImUITcqHcnNpx2cBoONXznFTuDQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/vehiculosConductor/Listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculosConductor",
+								"Listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ2NDA4NjM2LCJleHAiOjE2NDY0MTIyMzZ9.ybPyGftVWMSTkVuFwJEH_DeBLn9s3VRHbZQ7wYY-LDo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_Conductor\": 3,\r\n    \"id_Vehiculo\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculosConductor/Guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculosConductor",
+								"Guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_Conductor\": 3,\r\n    \"id_Vehiculo\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculosConductor/Eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculosConductor",
+								"Eliminar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Viajes",
+			"item": [
+				{
+					"name": "Guardar Viajes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id_Vehiculo\": 2,\r\n  \"id_Pasajero\": 1,\r\n  \"latitud_Inicial\": \"14.02497507955245\",\r\n  \"longitud_Inicial\": \"-86.58061326864976\",\r\n  \"latitud_Final\": \"14.045449284557051\",\r\n  \"longitud_Final\": \"-86.57563901511627\",\r\n  \"fecha_Inicial\": \"2022/3/03\",\r\n  \"fecha_Final\": \"2022/03/03\",\r\n  \"direccion_Inicial\": \"Unicah\",\r\n  \"direccion_Final\": \"La Concepción, Danlí\",\r\n  \"total\": 25.00,\r\n  \"id_Tipo_Pago\": 1,\r\n  \"id_Conductor\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/viajes/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"viajes",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ciudad",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/ciudades/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"ciudades",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion_Ciudad\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/ciudades/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"ciudades",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion_Ciudad\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/ciudades/modificar?id_Ciudad=3",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"ciudades",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "id_Ciudad",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/ciudades/eliminar?id_Ciudad=3",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"ciudades",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "id_Ciudad",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehiculos",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"FUY 334344\",\r\n    \"id_Modelo\": 1,\r\n    \"anio\": 2012,\r\n    \"color\": \"Azuñ\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"FUY 123\",\r\n    \"id_Modelo\": 1,\r\n    \"anio\": 2012,\r\n    \"color\": \"Azul\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos/modificar?id_Vehiculo=4",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "id_Vehiculo",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"estado\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos/eliminar?id_Vehiculo=4",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "id_Vehiculo",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipos de Pago",
+			"item": [
+				{
+					"name": "Inicio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/TiposDePago/",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"TiposDePago",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/TiposDePago/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"TiposDePago",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"descripcion_Pago\": \"Efectivo\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/TiposDePago/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"TiposDePago",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"descripcion_Pago\": \"Tigo Money\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/TiposDePago/modificar?id_Tipos_Pago=2",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"TiposDePago",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "id_Tipos_Pago",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehiculos Ciudad",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos_Ciudad/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos_Ciudad",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"id_Vehiculo\":4, \"id_Ciudad\":4 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos_Ciudad/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos_Ciudad",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"id_Vehiculo\":4, \"id_Ciudad\":2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos_Ciudad/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos_Ciudad",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id_Vehiculo\": 4,\r\n        \"id_Ciudad\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/vehiculos_Ciudad/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"vehiculos_Ciudad",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Modelos",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/modelos/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"modelos",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                \"descripcion_Modelo\": \"Yaris\",\r\n                \"estado_Modelo\":1,\r\n                \"id_Marca\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/modelos/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"modelos",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                \"descripcion_Modelo\": \"Corolla GR-Sport\",\r\n                \"estado_Modelo\": 1,\r\n                \"id_Marca\":1\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/modelos/modificar?id_Modelo=2",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"modelos",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "id_Modelo",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/modelos/eliminar?id_Modelo=2",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"modelos",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "id_Modelo",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Marcas",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/marcas/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"marcas",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"descripcion_Marca\":\"Nissan\",\r\n        \"estado_Marca\": 1\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/marcas/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"marcas",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"descripcion_Marca\":\"KIA\",\r\n        \"estado_Marca\": 1\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/marcas/modificar?id_Marca=2",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"marcas",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "id_Marca",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:4005/uber/marcas/eliminar?id_Marca=2",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"marcas",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "id_Marca",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Valoración",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ cantidad_estrellas, id_Viaje }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/valoracion/guardar",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"valoracion",
+								"guardar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cantidad_estrellas\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4005/uber/valoracion/modificar?id_Valoracion=1",
+							"host": [
+								"localhost"
+							],
+							"port": "4005",
+							"path": [
+								"uber",
+								"valoracion",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "id_Valoracion",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
