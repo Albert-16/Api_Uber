@@ -2,19 +2,28 @@
 const ModeloMarcas = require('../modelos/ModeloMarcas');
 const { validationResult } = require('express-validator');
 const msj = require("../Componentes/mensaje");
+const con = require('../Configuracion/coneccionMysql');
 
 //Definición de la función
 exports.listar = async (req, res) => {
     try {
-        // L I S T A R -- M A R C A S
-        const listaMarcas = await ModeloMarcas.findAll();
-        //Validación por si los campos se encuentran vacios.
-        if (listaMarcas.length == 0) //Si lista marcas está vacío o nulo.
-        {
-            msj("Listar las Marcas", "No existen Marcas en la base de datos", 200, [], res);
-        } else { //Si lista marcas tiene datos.
-            msj("Éxito", "Lista de Marcas", 200, listaMarcas, res);
-        }
+        var ListaMarcas = [];
+        const query = "select id_Marca as '#ID', descripcion_Marca as Marca , case when estado_Marca = 1 then 'Activo' else 'Inactivo' end Estado from marcas;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                ListaMarcas = result;
+                const totalRegistros = result.length;
+                if (!ListaMarcas) {
+                    msj("Lista Vaciá", "No existen Marcas en la base de datos", 200, [], res);
+                }
+                else {
+                    msj("Lista de Marcas", "Total de registros: " + totalRegistros, 200, ListaMarcas, res);
+                }
+            });
+        });
     } catch (error) {
         res.status(500).json({
             error: error.toString()
@@ -27,13 +36,12 @@ exports.guardar = async (req, res) => {
     try {
         const validacion = validationResult(req);
         if (!validacion.isEmpty()) {
-            console.log(validacion.array());
-            res.json(validacion.array());
+            msj("Datos Erroneos", "Los datos enviados no son correctos", 200, validacion.array(), res);
         } else {
             console.log(req.body);
             const {
                 descripcion_Marca,
-                estado_Marca,
+                estado_Marca
             } = req.body;
             if (!descripcion_Marca) {
                 msj("Advertencia", "Debe llenar los campos que son obligatorios", 200, [], res);
@@ -62,16 +70,16 @@ exports.modificar = async (req, res) => {
     try {
         const validacion = validationResult(req);
         if (!validacion.isEmpty()) {
-            console.log(validacion.array());
-            res.json(validacion.array());
+            msj("Datos Erroneos", "Los datos enviados no son correctos", 200, validacion.array(), res);
         } else {
             const {
                 id_Marca
             } = req.query;
             const {
+                descripcion_Marca,
                 estado_Marca
             } = req.body;
-            if (!estado_Marca) {
+            if (estado_Marca == null) {
                 msj("Advertencia", "Debe ingresar un estado válido.", 200, [], res);
             } else {
                 var buscarMarcas = await ModeloMarcas.findOne({
@@ -83,6 +91,7 @@ exports.modificar = async (req, res) => {
                     msj("Advertencia", "El id de la marca no existe", 200, [], res)
                 } else {
                     buscarMarcas.estado_Marca = estado_Marca;
+                    buscarMarcas.descripcion_Marca= descripcion_Marca;
                     await buscarMarcas.save()
                         .then((data) => {
                             msj("Éxito", "El registro se actualizó correctamente.", 200, data, res);
