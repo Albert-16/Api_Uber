@@ -34,6 +34,7 @@ body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe conten
 body('apellido').isLength({min:2}).withMessage("El apellido no es valido,debe contener al menos 2 caracteres..."),
 body('telefono').isLength({min:8}).withMessage("El teléfono no es valido,debe contener al menos 8 caracteres..."),
 body('correo').isEmail().withMessage("Ingrese un Correo Electrónico Valido..."),
+body('nombre_Usuario').isLength({min:2}).withMessage("El nombre de usuario no es valido,debe contener al menos 2 caracteres..."),
 body('contrasenia').isLength({min:8}).withMessage("La Contraseña debe contener al menos 8 caracteres..."),
 controladorUsuario.GuardarUsuarios);
 
@@ -41,6 +42,7 @@ router.put('/editarUsuarios',controladorSesiones.validarAutenticado,
 query('id').isInt().withMessage("Debe ser un numero entero"),
 body('dni').isLength({max:13,min:13}).withMessage("El número de identidad no es valido ,solo se permiten 13 caracteres."),
 body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe contener al menos 2 caracteres..."),
+body('nombre_Usuario').isLength({min:2}).withMessage("El nombre de usuario no es valido,debe contener al menos 2 caracteres..."),
 body('apellido').isLength({min:2}).withMessage("El apellido no es valido,debe contener al menos 2 caracteres..."),
 body('telefono').isLength({min:8}).withMessage("El teléfono no es valido,debe contener al menos 8 caracteres..."),
 body('correo').isEmail().withMessage("Ingrese un Correo Electrónico Valido..."),

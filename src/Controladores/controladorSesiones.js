@@ -137,7 +137,7 @@ exports.IncioSesion = async (req, res, next) => {
                         token: token,
                         Usuario: DatosUsuario,
                     };
-                    console.log(data);
+                    
                     const infoMsj = "Bienvenido, " + DatosUsuario.Nombre + " " + DatosUsuario.Apellido;
                     msj("Menu Principal", infoMsj, 200, data, res);
                 }
