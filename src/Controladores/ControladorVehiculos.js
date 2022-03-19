@@ -47,9 +47,7 @@ exports.GuardarVehiculos = async (req, res) => {
                 msj("Advertencia", " Debe enviar los datos completos.", 200, [], res);
             }
             else {
-                await ModeloVehiculo.create({
-                    placa, id_Modelo, anio, color
-                })
+                await ModeloVehiculo.create({...req.body})
                     .then((data) => {
                         msj("Registro Guardado", "Registro almacenado con éxito.", 200, data, res);
                     })

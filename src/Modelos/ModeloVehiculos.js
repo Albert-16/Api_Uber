@@ -13,6 +13,10 @@ const Vehiculos = db.define(
                 autoIncrement: true,
                 allowNull: false,
             },
+            nombre:{
+                type: sequelize.STRING(45),
+                allowNull: true,
+            },   
             id_Modelo:{
                 type: sequelize.INTEGER,
                 allowNull: false,
@@ -34,6 +38,10 @@ const Vehiculos = db.define(
                 allowNull: true,
                 defaultValue: true,
             },
+            imagen:{
+                type: sequelize.STRING(45),
+                allowNull: true,
+            },  
             fecha_Registro:{
                 type: sequelize.DATE,
                 allowNull: true,

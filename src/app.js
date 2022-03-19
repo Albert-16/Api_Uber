@@ -1,6 +1,7 @@
 //Declaracion de Variables 
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 const app = express();
 require('dotenv').config();
 const passport = require('passport');
@@ -20,7 +21,7 @@ app.use('/uber/vehiculosConductor', require('./Rutas/rutasVehiculoConductor'));
 app.use('/uber/vehiculos', require('./Rutas/rutasVehiculos'));
 app.use('/uber/vehiculos_Ciudad', require('./Rutas/rutasVehiculosCiudad'));
 app.use('/uber/TiposDePago', require('./Rutas/rutasTiposDePagos'));
-
+app.use('/uber/vehiculos/img',express.static(path.join(__dirname,'Publico/Img/Vehiculos')));
 app.use('/uber/viajes/', require('./Rutas/rutaViajes'));
 app.use('/uber/marcas', require('./Rutas/RutasMarcas'));
 app.use('/uber/modelos', require('./Rutas/RutasModelos'));
