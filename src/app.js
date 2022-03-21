@@ -25,6 +25,7 @@ app.use('/uber/vehiculos/img',express.static(path.join(__dirname,'Publico/Img/Ve
 app.use('/uber/viajes/', require('./Rutas/rutaViajes'));
 app.use('/uber/marcas', require('./Rutas/RutasMarcas'));
 app.use('/uber/modelos', require('./Rutas/RutasModelos'));
+app.use('/uber/archivos/', require('./Rutas/RutasArchivos'));
 
 app.use('/uber/valoracion', require('./Rutas/rutasValoraciones'));
 app.use('/uber/ciudades', require('./Rutas/rutasCiudades'));
