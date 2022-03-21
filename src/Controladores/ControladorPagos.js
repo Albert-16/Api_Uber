@@ -70,13 +70,13 @@ exports.ModificarRegistro = async (req, res) => {
     try {
         const validacion = validationResult(req);
         const { idTarjeta_Credito, id_Usuarios } = req.query;
-        const { titular_Tarjeta, numeroTarjeta, fecha_Vencimiento, CVC, correo_Electronico } = req.body;
-    if (!validacion.isEmpty) {
+        const { titular_Tarjeta, numeroTarjeta, fecha_Vencimiento, CVC, correo_Electronico,estado } = req.body;
+    if (!validacion.isEmpty()) {
             msj("Datos Incorrectos", "Los datos ingresados no son validos", 200, validacion.array(), res);
         }
         else {
 
-            if (!idTarjeta_Credito|| !id_Usuarios || !titular_Tarjeta || !numeroTarjeta || !fecha_Vencimiento || !CVC || !correo_Electronico) {
+            if (!idTarjeta_Credito|| !id_Usuarios || !titular_Tarjeta || !numeroTarjeta || !fecha_Vencimiento || !CVC || !correo_Electronico || !estado) {
                 msj("Advertencia", " Debe enviar los datos completos.", 200, [], res);
             }
             else {
@@ -86,7 +86,7 @@ exports.ModificarRegistro = async (req, res) => {
                     }
                 });
                 if (!buscarTarjetaCredito) {
-                    msj("Tipo de pago no encontrado", "El id no existe o no se encuentra activo");
+                    msj("Tarjeta no encontrada", "El id no existe o no se encuentra activo");
                 }
                 else {     
                     buscarTarjetaCredito.id_Usuarios = id_Usuarios;             
@@ -95,6 +95,7 @@ exports.ModificarRegistro = async (req, res) => {
                     buscarTarjetaCredito.fecha_Vencimiento = fecha_Vencimiento;
                     buscarTarjetaCredito.CVC = CVC;
                     buscarTarjetaCredito.correo_Electronico = correo_Electronico;
+                    buscarTarjetaCredito.estado = estado;
 
                     await buscarTarjetaCredito.save()
                         .then((data) => {
@@ -104,9 +105,7 @@ exports.ModificarRegistro = async (req, res) => {
                             console.log(error);
                             msj("Advertencia", "Error al modificar el registro.", 200, [], res);
                         });
-
                 }
-
             }
         }
     } catch (error) {
@@ -115,5 +114,45 @@ exports.ModificarRegistro = async (req, res) => {
         });
     }
 
+};
+
+exports.EliminarRegistro = async (req, res) => {
+    try {
+        const validacion = validationResult(req);
+    if (!validacion.isEmpty()) {
+            msj("Datos Incorrectos", "Los datos ingresados no son validos", 200, validacion.array(), res);
+        }
+        else {
+            const {idTarjeta_Credito} = req.query;
+            if (!idTarjeta_Credito) {
+                msj("Advertencia", " Debe enviar los datos completos.", 200, [], res);
+            }
+            else {
+                var buscarTarjetaCredito = await ModeloPagos.findOne({
+                    where: {
+                        idTarjeta_Credito: idTarjeta_Credito
+                    }
+                });
+                if (!buscarTarjetaCredito) {
+                    msj("Tarjeta no encontrada", "El id no existe o no se encuentra activo");
+                }
+                else {     
+                    buscarTarjetaCredito.estado = 0;
+                    await buscarTarjetaCredito.save()
+                        .then((data) => {
+                            msj("Registro Actualizado", "¡Registro modificado con éxito!", 200, data, res);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            msj("Advertencia", "Error al modificar el registro.", 200, [], res);
+                        });
+                }
+            }
+        }
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
 };
 

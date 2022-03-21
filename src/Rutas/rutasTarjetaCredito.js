@@ -17,6 +17,7 @@ body('numeroTarjeta').isLength({min:16}).withMessage("Debe ingresar 16 digitos c
 body('fecha_Vencimiento').isLength({min:4},{max:4}).withMessage("Debe ingresar 4 digitos"),
 body('CVC').isLength({min:3},{max:4}).withMessage("Debe ingresar 3 digitos como minimo y 4 como maximo"),
 body('correo_Electronico').isEmail().withMessage("Debe ingresar una direccion de correo electronica valida"),
+body('estado').isBoolean().withMessage("Estado debe ser un valor de [1] o [0]"),
 ControladorPagos.GuardarRegistro,
 )
 
@@ -28,7 +29,12 @@ body('numeroTarjeta').isLength({min:16}).withMessage("Debe ingresar 16 digitos c
 body('fecha_Vencimiento').isLength({min:4},{max:4}).withMessage("Debe ingresar 4 digitos"),
 body('CVC').isLength({min:3},{max:4}).withMessage("Debe ingresar 3 digitos como minimo y 4 como maximo"),
 body('correo_Electronico').isEmail().withMessage("Debe ingresar una direccion de correo electronica valida"),
+body('estado').isBoolean().withMessage("Estado debe ser un valor de [1] o [0]"),
 ControladorPagos.ModificarRegistro,
 )
 
+router.put('/eliminar', controladorSesiones.validarAutenticado, 
+query('idTarjeta_Credito').isInt().withMessage("Debe enviar un ID válido"),
+ControladorPagos.EliminarRegistro,
+)
 module.exports = router;
