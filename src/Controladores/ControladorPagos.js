@@ -41,14 +41,14 @@ exports.GuardarRegistro = async (req, res) => {
             msj("Datos Incorrectos", "Los datos ingresados no son validos", 200, validacion.array(), res);
         }
         else {
-            const {id_Usuarios } = req.query;
-            const { titular_Tarjeta, numeroTarjeta, fecha_Vencimiento, CVC, correo_Electronico } = req.body;
+           
+            const {id_Usuarios, titular_Tarjeta, numeroTarjeta, fecha_Vencimiento, CVC, correo_Electronico } = req.body;
             if (!id_Usuarios || !titular_Tarjeta || !numeroTarjeta || !fecha_Vencimiento || !CVC || !correo_Electronico) {
                 msj("Advertencia", " Debe enviar los datos completos.", 200, [], res);
             }
             else {
                 await ModeloPagos.create({
-                    id_Usuarios, titular_Tarjeta, numeroTarjeta, fecha_Vencimiento, CVC, correo_Electronico
+                    ...req.body
                 })
                     .then((data) => {
                         msj("Registro Guardado", "Registro almacenado con éxito.", 200, data, res);

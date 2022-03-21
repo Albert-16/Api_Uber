@@ -33,10 +33,23 @@ const TarjetasCredito = db.define(
                 type: sequelize.STRING(45),
                 allowNull: false,
             },
+            estado:{
+                type: sequelize.BOOLEAN,
+                allowNull: true,
+                defaultValue: true,
+            },
             id_Usuarios:{
                 type: sequelize.INTEGER,
                 allowNull: false,
             },
+            fecha_Registro:{
+                type: sequelize.DATE,
+                allowNull: true,
+            },
+            fecha_Actualizacion:{
+                type: sequelize.DATE,
+                allowNull: true,
+            }
 
         },
     {

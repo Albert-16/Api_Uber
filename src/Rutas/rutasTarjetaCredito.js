@@ -11,7 +11,7 @@ router.get('/',controladorSesiones.validarAutenticado,ControladorPagos.inicio);
 router.get('/listar',controladorSesiones.validarAutenticado,ControladorPagos.ListarRegistro);
 
 router.post('/guardar',controladorSesiones.validarAutenticado,
-query('id_Usuarios').isInt().withMessage("Debe enviar un ID válido"),
+body('id_Usuarios').isInt().withMessage("Debe enviar un ID válido"),
 body('titular_Tarjeta').isLength({min:6}).withMessage("Debe contener un mínimo de 6 caracteres"),
 body('numeroTarjeta').isLength({min:16}).withMessage("Debe ingresar 16 digitos como minimo"),
 body('fecha_Vencimiento').isLength({min:4},{max:4}).withMessage("Debe ingresar 4 digitos"),
