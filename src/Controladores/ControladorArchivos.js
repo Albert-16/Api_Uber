@@ -16,15 +16,17 @@ exports.Recibir = async (req, res) => {
     }
     else {
         try {
-            const buscarImagen = fs.existsSync(path.join(__dirname, '../Publico/Img/Vehiculos' + 
+            const buscarImagen = fs.existsSync(path.join(__dirname, '../Publico/Img/Vehiculos/' + 
             BuscarVehiculo.imagen));
+            console.log(buscarImagen);
             if(!buscarImagen){
-                msj('Imágenes de vehículos', 'La imagen no existe', 200, [], res);
+               // msj('Imágenes de vehículos', '', 200, [], res);
+               console.log("La imagen no existe");
             }
             else{
-                fs.unlinkSync(path.join(__dirname, '../Publico/Img/Vehiculos' + 
+                fs.unlinkSync(path.join(__dirname, '../Publico/Img/Vehiculos/' + 
                 BuscarVehiculo.imagen));
-                msj('Eliminación de imágenes', 'La imagen se eliminó', 200, [], res);
+             //   msj('Eliminación de imágenes', 'La imagen se eliminó', 200, [], res);
                 console.log('La imagen ha sido eliminada');
             }
         }
