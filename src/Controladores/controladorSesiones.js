@@ -127,10 +127,14 @@ exports.IncioSesion = async (req, res, next) => {
                     msj("Credenciales Incorrectas","El Usuario no existe o contraseña invalida", 200, [], res);
                 } else {
                     const DatosUsuario = {
+                        id: BuscarUsuario.id_Usuarios,
                         Usuario: BuscarUsuario.nombre_Usuario,
                         Nombre: BuscarUsuario.nombre,
                         Apellido: BuscarUsuario.apellido,
-                        "Correo Electrónico": BuscarUsuario.correo,
+                        Correo: BuscarUsuario.correo,
+                        DNI: BuscarUsuario.dni,
+                        Tel: BuscarUsuario.telefono,
+                        Contra: contrasenia
                     };
                     const token = passport.getToken({ id: BuscarUsuario.id_Usuarios });
                     const data = {

@@ -39,7 +39,7 @@ const Viajes=db.define(
         },
         fecha_Final:{
             type:sequelize.DATE,
-            allowNull:false,
+            allowNull:true,
         },
         fecha:{
             type:sequelize.DATE,

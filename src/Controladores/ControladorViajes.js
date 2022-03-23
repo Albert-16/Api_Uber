@@ -82,34 +82,20 @@ exports.guardar = async (req, res) => {
                 longitud_Final,
                 latitud_Final,
                 fecha_Inicial,
-                fecha_Final,
                 direccion_Inicial,
                 direccion_Final,
                 id_Tipo_Pago,
                 total,
                 id_Conductor
             } = req.body;
-            if (!id_Vehiculo || !id_Pasajero || !latitud_Inicial || !longitud_Inicial || !longitud_Final || !latitud_Final || !fecha_Inicial || !fecha_Final ||
+            if (!id_Vehiculo || !id_Pasajero || !latitud_Inicial || !longitud_Inicial || !longitud_Final || !latitud_Final || !fecha_Inicial || 
                 !direccion_Inicial || !direccion_Final || !id_Tipo_Pago || !total || !id_Conductor) {
                 msj("Advertencia", "Debe llenar los campos que son obligatorios", 200, [], res);
             } else {
                 var distancia = this.getKilometros(parseFloat(latitud_Inicial), parseFloat(longitud_Inicial), parseFloat(latitud_Final), parseFloat(longitud_Final));
 
                 await ModeloViaje.create({
-                    id_Vehiculo: id_Vehiculo,
-                    id_Pasajero: id_Pasajero,
-                    latitud_Inicial: latitud_Inicial,
-                    longitud_Inicial: longitud_Inicial,
-                    longitud_Final: longitud_Final,
-                    latitud_Final: latitud_Final,
-                    fecha_Inicial: fecha_Inicial,
-                    fecha_Final: fecha_Final,
-                    direccion_Inicial: direccion_Inicial,
-                    direccion_Final: direccion_Final,
-                    id_Tipo_Pago: id_Tipo_Pago,
-                    total: ObtenerTotal(distancia * 0.001),
-                    distancia_Km: (distancia * 0.001),
-                    id_Conductor: id_Conductor
+                   ...req.body
                 })
                     .then((data) => {
                         msj("Éxito", "El registro se almacenó correctamente.", 200, data, res);

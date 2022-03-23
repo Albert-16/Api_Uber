@@ -22,6 +22,7 @@ app.use('/uber/vehiculos', require('./Rutas/rutasVehiculos'));
 app.use('/uber/vehiculos_Ciudad', require('./Rutas/rutasVehiculosCiudad'));
 app.use('/uber/TiposDePago', require('./Rutas/rutasTiposDePagos'));
 app.use('/uber/vehiculos/img',express.static(path.join(__dirname,'Publico/Img/Vehiculos')));
+app.use('/uber/user/img',express.static(path.join(__dirname,'Publico/Img/Usuarios')));
 app.use('/uber/viajes/', require('./Rutas/rutaViajes'));
 app.use('/uber/marcas', require('./Rutas/RutasMarcas'));
 app.use('/uber/modelos', require('./Rutas/RutasModelos'));

@@ -15,7 +15,6 @@ router.post('/guardar',controladorSesiones.validarAutenticado,
     body('latitud_Final').isString(100).withMessage('Es necesario ingresar una latitud final'),
     body('longitud_Final').isString(100).withMessage('Es necesario ingresar una longitud final'),
     body('fecha_Inicial').isDate().withMessage('Es necesario ingresar una fecha inicial'),
-    body('fecha_Final').isDate().withMessage('Es necesario ingresar una fecha final'),
     body('direccion_Inicial').isString(200).withMessage('Es necesario ingresar una dirección inicial'),
     body('direccion_Final').isString(200).withMessage('Es necesario ingresar una dirección final'),
     body('total').isDecimal().withMessage('Es necesario ingresar un total valido'), controladorViaje.guardar);
