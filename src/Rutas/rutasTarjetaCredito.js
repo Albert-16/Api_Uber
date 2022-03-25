@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/',controladorSesiones.validarAutenticado,ControladorPagos.inicio);
 router.get('/listar',controladorSesiones.validarAutenticado,ControladorPagos.ListarRegistro);
-
+router.get('/MetodoDePago',controladorSesiones.validarAutenticado,ControladorPagos.MetodoDePagoByUser);
 router.post('/guardar',controladorSesiones.validarAutenticado,
 body('id_Usuarios').isInt().withMessage("Debe enviar un ID válido"),
 body('titular_Tarjeta').isLength({min:6}).withMessage("Debe contener un mínimo de 6 caracteres"),

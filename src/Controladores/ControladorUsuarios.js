@@ -101,14 +101,28 @@ exports.EditarUsuario = async (req, res) => {
                 }
                 else
                 {
-                    if (!existUser.VerificarContrasenia(contrasenia,existUser.contrasenia)) {
+                    if (!existUser.VerificarContrasenia(contraseniaActual,existUser.contrasenia)) {
                         msj("Contraseña Incorrecta","Contraseña invalida", 200, [], res);
                     }
                     else
                     {
+                        
                         await existUser.update({ ...req.body });
+                        const DatosActulizados = await modeloUsuario.findByPk(id);
+                        const DatosUsuario = {
+                            id: DatosActulizados.id_Usuarios,
+                            Usuario: DatosActulizados.nombre_Usuario,
+                            Nombre: DatosActulizados.nombre,
+                            Apellido: DatosActulizados.apellido,
+                            Correo: DatosActulizados.correo,
+                            DNI: DatosActulizados.dni,
+                            Tel: DatosActulizados.telefono,
+                            Contra: contraseniaActual
+                        };
+
+                        const Datos = {Usuario: DatosUsuario}
                         const infoMsj = "El usuario: " + nombre + " " + apellido + " se actualizaron sus datos con éxito";
-                        msj("Usuario Modificado", infoMsj, 200, [], res);
+                        msj("Usuario Modificado", infoMsj, 200, Datos, res);
                     }
 
                 }

@@ -30,6 +30,34 @@ exports.listar = async (req, res) => {
     }
 };
 
+
+exports.totalViajes = async (req, res) => {
+    try {
+        var ListaViajesByUser = [];
+        const { id } = req.query;
+        const query = "select coalesce(count(*),0) total ,coalesce(sum(distancia_Km),0) 'KmReccoridos' from viajes where id_Pasajero = ? ;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query,[id], function (err, result, fields) {
+                if (err) throw err;
+                ListaViajesByUser = result;
+                const totalRegistros = result.length;
+                if (!ListaViajesByUser) {
+                    msj("Lista Vaciá", "No existen viajes en la base de datos", 200, [], res);
+                }
+                else {
+                    msj("Lista de Viajes", "Total de registros: " + totalRegistros, 200,  ListaViajesByUser, res);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+};
+
 function degreesToRadians(degrees) {
     return degrees * Math.PI / 180;
 }

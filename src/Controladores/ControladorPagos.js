@@ -34,6 +34,39 @@ exports.ListarRegistro = async (req, res) => {
 
 };
 
+exports.MetodoDePagoByUser = async (req, res) => {
+
+    try {
+        const {id} = req.query;
+        const listaDePagos = await ModeloPagos.findOne({
+            attributes: [
+                ['idTarjeta_Credito', '#ID'],
+                ['titular_Tarjeta', 'Titular de la Tarjeta'],
+                ['numeroTarjeta', 'Numero de la Tarjeta'],
+                ['CVC',"CVC"],
+                ['correo_Electronico', 'Correo Electronico'],
+                ['id_Usuarios', 'ID Usuario']
+            ],
+            where:{
+                id_Usuarios: id
+            }
+        });
+        if (!listaDePagos) {
+            msj("Lista Vacía", "No hay registros de Tarjetas de Credito en la base de datos", 200, [], res);
+        }
+        else {
+            msj("Tarjetas de Credito", "Total de Registros: " + listaDePagos.length, 200, listaDePagos, res);
+        }
+    }
+    catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+
+};
+
+
 exports.GuardarRegistro = async (req, res) => {
     try {
         const validacion = validationResult(req);
