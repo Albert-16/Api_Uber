@@ -4,6 +4,7 @@ const {body,query} = require('express-validator');
 const controladorSesiones = require('../Controladores/controladorSesiones');
 const router = Router();
 router.get('/listar',controladorSesiones.validarAutenticado, controladorModelos.listar);
+router.get('/listarModelos',controladorSesiones.validarAutenticado, controladorModelos.getDatos);
 router.post('/guardar',controladorSesiones.validarAutenticado,
     body('descripcion_Modelo').isString().withMessage('Debe ingresar un Modelo'),
     body('id_Marca').isInt().withMessage('Debe ingresar un ID de una Marca existente'),

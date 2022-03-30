@@ -34,6 +34,32 @@ exports.ListarVehiculos = async (req, res) => {
     }
 };
 
+exports.getDatos = async (req,res) =>{
+    try {
+        var Lista = [];
+        const query = "SELECT id_Vehiculo as value , concat(nombre,' ',placa) as label FROM system_uber.vehiculos where estado = 1;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                Lista = result;
+                const totalRegistros = result.length;
+                if (!Lista) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                   res.json(Lista);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+}
+
 exports.GuardarVehiculos = async (req, res) => {
     try {
         const validacion = validationResult(req);

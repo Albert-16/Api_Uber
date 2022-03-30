@@ -135,6 +135,33 @@ exports.EditarUsuario = async (req, res) => {
     }
 }
 
+
+exports.getDatos = async (req,res) =>{
+    try {
+        var Lista = [];
+        const query = "SELECT id_Usuarios as value,concat(nombre,' ',apellido) as label FROM system_uber.usuarios where estado = 1 and tipo_Usuario = 2;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                Lista = result;
+                const totalRegistros = result.length;
+                if (!Lista) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                   res.json(Lista);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+}
+
 exports.EliminarUsuario = async (req, res) => {
     try {
         const { id } = req.query;

@@ -5,6 +5,7 @@ const {body,query} = require('express-validator');
 const router = Router();
 
 router.get('/listar',controladorSesiones.validarAutenticado, controladorMarcas.listar);
+router.get('/listarMarcas',controladorSesiones.validarAutenticado, controladorMarcas.getDatos);
 router.post('/guardar',controladorSesiones.validarAutenticado,
     body('descripcion_Marca').isString().withMessage('Debe ingresar una marca'),
     controladorMarcas.guardar);

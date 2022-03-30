@@ -31,6 +31,34 @@ exports.listar = async (req, res) => {
     }
 };
 
+
+exports.getDatos = async (req,res) =>{
+    try {
+        var ListaMarcas = [];
+        const query = "select id_Marca as value, descripcion_Marca as label from marcas;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                ListaMarcas = result;
+                const totalRegistros = result.length;
+                if (!ListaMarcas) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                   res.json(ListaMarcas);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+}
+
+
 // G U A R D A R -- M A R C A S
 exports.guardar = async (req, res) => {
     try {

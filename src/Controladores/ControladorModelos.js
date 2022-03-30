@@ -29,6 +29,34 @@ exports.listar = async (req, res) => {
         });
     }
 };
+
+exports.getDatos = async (req,res) =>{
+    try {
+        var Lista = [];
+        const query = "select id_Modelo as value, descripcion_Modelo as label from modelos where estado_Modelo = 1;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                Lista = result;
+                const totalRegistros = result.length;
+                if (!Lista) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                   res.json(Lista);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+}
+
+
 // G U A R D A R -- M A R C A S
 exports.guardar = async (req, res) => {
     try {

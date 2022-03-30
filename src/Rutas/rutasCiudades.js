@@ -5,6 +5,7 @@ const controladorSesiones = require('../Controladores/controladorSesiones');
 const router = Router();
 
 router.get('/listar',controladorSesiones.validarAutenticado, ControladorCiudades.listar);
+router.get('/listarCiudades',controladorSesiones.validarAutenticado, ControladorCiudades.getDatos);
 /*-----------------------------------------------------------------------------------------------------------*/ 
 router.post('/guardar', controladorSesiones.validarAutenticado,
     body('id_Ciudad').isInt().withMessage('Debe enviar el ID de una ciudad.'),

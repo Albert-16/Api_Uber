@@ -28,6 +28,7 @@ router.get("/", (req, res) => {
 
 
 router.get('/listaUsuarios',controladorSesiones.validarAutenticado,controladorUsuario.ListarUsuarios);
+router.get('/getUsuarios',controladorSesiones.validarAutenticado,controladorUsuario.getDatos);
 router.post('/guardarUsuarios',
 body('dni').isLength({max:13,min:13}).withMessage("El número de identidad no es valido ,solo se permiten 13 caracteres."),
 body('nombre').isLength({min:2}).withMessage("El nombre no es valido,debe contener al menos 2 caracteres..."),

@@ -1,7 +1,7 @@
 //Cargamos el modelo que creamos
 const ModeloCiudad = require('../Modelos/ModeloCiudad');
 const msj = require('../Componentes/mensaje');
-
+const con = require('../Configuracion/coneccionMysql');
 //Definicion de la función
 // L I S T A R -- C I U D A D E S 
 exports.listar = async (req, res) => {
@@ -27,6 +27,32 @@ exports.listar = async (req, res) => {
         });
     }
 };
+
+exports.getDatos = async (req,res) =>{
+    try {
+        var Lista = [];
+        const query = "SELECT id_Ciudad as value , descripcion_Ciudad as label FROM system_uber.ciudades;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                Lista = result;
+                const totalRegistros = result.length;
+                if (!Lista) {
+                    msj("Lista Vaciá", "No existen Modelos en la base de datos", 200, [], res);
+                }
+                else {
+                   res.json(Lista);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+}
 
 // G U A R D A R -- C I U D A D E S 
 exports.guardar = async (req, res) => {
