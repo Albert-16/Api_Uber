@@ -10,6 +10,7 @@ const router = Router();
 router.get('/',controladorVehiculo.inicio , controladorSesiones.validarAutenticado);
 router.get('/listar',controladorSesiones.validarAutenticado,controladorVehiculo.ListarVehiculos);
 router.get('/listarVehiculos',controladorSesiones.validarAutenticado,controladorVehiculo.getDatos);
+router.get('/listarTodosVehiculos',controladorSesiones.validarAutenticado,controladorVehiculo.ListarTodoVehiculos);
 
 router.post('/guardar' , controladorSesiones.validarAutenticado,
 body('placa').isLength({min:7 ,max:7}).withMessage("La placa solo debe contener 7 caracteres"),

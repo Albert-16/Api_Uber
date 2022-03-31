@@ -60,6 +60,34 @@ exports.getDatos = async (req,res) =>{
     }
 }
 
+
+exports.ListarTodoVehiculos = async (req, res) => {
+
+    try {
+        var ListaVehiculos = [];
+        const query = "select * from listartodovehiculos;";
+        //Funcion para ejecutar un proceso almacenado
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query(query, function (err, result, fields) {
+                if (err) throw err;
+                ListaVehiculos = result;
+                const totalRegistros = result.length;
+                if (!ListaVehiculos) {
+                    msj("Lista Vaciá", "No existen vehículos en la base de datos", 200, [], res);
+                }
+                else {
+                    msj("Lista de Vehículos", "Total de registros: " + totalRegistros, 200, ListaVehiculos, res);
+                }
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: error.toString()
+        });
+    }
+};
+
 exports.GuardarVehiculos = async (req, res) => {
     try {
         const validacion = validationResult(req);
