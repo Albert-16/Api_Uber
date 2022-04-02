@@ -8,7 +8,7 @@ const con = require('../Configuracion/coneccionMysql');
 exports.listar = async (req, res) => {
     try {
         var ListaMarcas = [];
-        const query = "select id_Marca as '#ID', descripcion_Marca as Marca , case when estado_Marca = 1 then 'Activo' else 'Inactivo' end Estado from marcas;";
+        const query = "select id_Marca as 'Id', descripcion_Marca as Marca , case when estado_Marca = 1 then 'Activo' else 'Inactivo' end Estado from marcas;";
         //Funcion para ejecutar un proceso almacenado
         con.connect(function (err) {
             if (err) throw err;

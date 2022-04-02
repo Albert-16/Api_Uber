@@ -123,7 +123,7 @@ exports.ModificarVehiculos = async (req, res) => {
     try {
         const validacion = validationResult(req);
         const { id_Vehiculo } = req.query;
-        const { placa, id_Modelo, anio, color } = req.body;
+        const { placa, id_Modelo, anio, color,estado } = req.body;
         if (!validacion.isEmpty()) {
             msj("Datos Incorrectos", "Los datos ingresados no son validos", 200, validacion.array(), res);
         }
@@ -145,6 +145,7 @@ exports.ModificarVehiculos = async (req, res) => {
                     buscarVehiculo.id_Modelo = id_Modelo;
                     buscarVehiculo.anio = anio;
                     buscarVehiculo.color = color;
+                    buscarVehiculo.estado = estado;
                     await buscarVehiculo.save()
                         .then((data) => {
                             msj("Registro Actualizado", "¡Vehiculo modificado con éxito!", 200, data, res);
