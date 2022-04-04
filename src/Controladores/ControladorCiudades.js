@@ -8,7 +8,7 @@ exports.listar = async (req, res) => {
     try {
         const listaCiudades = await ModeloCiudad.findAll({
             attributes:[
-                ['id_Ciudad','#ID'],
+                ['id_Ciudad','Id'],
                 ['descripcion_Ciudad','Ciudad']
             ]
         });
